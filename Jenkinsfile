@@ -55,7 +55,7 @@ pipeline {
                 echo "Building Docker Image"
                 // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
                 script{
-                    dockerImage = docker.build("1332117977/${env.JOB_NAME}:${env.BUILD_TAG}")
+                    dockerImage = docker.build("1332117977/${env.JOB_NAME}:${env.BUILD_TAG} .")
                 }
             }
         }
