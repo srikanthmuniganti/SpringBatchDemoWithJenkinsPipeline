@@ -53,10 +53,10 @@ pipeline {
         stage('Building Docker Image'){
             steps{
                 echo "Building Docker Image"
-                // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
-                script{
-                    dockerImage = docker.build("1332117977/${env.JOB_NAME}:${env.BUILD_TAG}")
-                }
+                sh "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
+                //script{
+                //    dockerImage = docker.build("1332117977/${env.JOB_NAME}:${env.BUILD_TAG}")
+                //}
             }
         }
 
@@ -65,7 +65,7 @@ pipeline {
                 echo "Pushing Docker Image"
                 // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
                 script{
-                    docker.withRegistry('','dockerhub'){
+                    dockerHome.withRegistry('','dockerhub'){
                         dockerImage.push()
                         dockerImage.push('latest')
                     }                    
