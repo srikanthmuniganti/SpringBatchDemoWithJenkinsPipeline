@@ -75,31 +75,31 @@ pipeline {
                 }
             }
 		
-	stage('Running Docker Image'){
-            steps{
-                echo "Running Docker Image"
-                echo "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
-                //sh "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
-                script{
-                    dockerImage.withRun('-p 8090:8090')
-                }
-            }
-        }
-        }
+		stage('Running Docker Image'){
+	        steps{
+	            echo "Running Docker Image"
+	            echo "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
+	            //sh "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
+	            script{
+	                dockerImage.withRun('-p 8090:8090')
+	                }
+	            }
+	        }
+	    }
     }
-
-    post{
-        success{
-            echo "successfully build !!!!!!"
-        }
-        failure{
-            echo "failure happened !!!!!!!"
-        }
-        always{
-            echo "I'm always executed!!!!!!"
-        }
-        changed{
-            echo "build status changed !!!!!"
-        }
-    }
+	
+	    post{
+	        success{
+	            echo "successfully build !!!!!!"
+	        }
+	        failure{
+	            echo "failure happened !!!!!!!"
+	        }
+	        always{
+	            echo "I'm always executed!!!!!!"
+	        }
+	        changed{
+	            echo "build status changed !!!!!"
+	        }
+	    }
 }
