@@ -25,7 +25,7 @@ pipeline {
         stage('Environment variable values'){
             steps{
             	sh "mvn --version"
-            	sh "docker version"
+            	//sh "docker version"
                 echo "PATH - $PATH"
                 echo "BUILD_NUMBER - $env.BUILD_NUMBER"
                 echo "BUILD_ID - $env.BUILD_ID"
@@ -62,44 +62,33 @@ pipeline {
                 }
             }
         }
-	    
+
         stage('Pushing Docker Image'){
             steps{
                 echo "Pushing Docker Image"
                 // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
                 script{
-                    docker.withRegistry('https://registry.hub.docker.com','dockerhub'){
+                    docker.withRegistry('','dockerhub'){
                         dockerImage.push()
                         dockerImage.push('latest')
                     }                    
                 }
             }
-		
-		stage('Running Docker Image'){
-	        steps{
-	            echo "Running Docker Image"
-	            echo "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
-	            //sh "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
-	            script{
-	                dockerImage.withRun('-p 8090:8090')
-	                }
-	            }
-	        }
-	    }
+        }
     }
-	
-	    post{
-	        success{
-	            echo "successfully build !!!!!!"
-	        }
-	        failure{
-	            echo "failure happened !!!!!!!"
-	        }
-	        always{
-	            echo "I'm always executed!!!!!!"
-	        }
-	        changed{
-	            echo "build status changed !!!!!"
-	        }
-	    }
+
+    post{
+        success{
+            echo "successfully build !!!!!!"
+        }
+        failure{
+            echo "failure happened !!!!!!!"
+        }
+        always{
+            echo "I'm always executed!!!!!!"
+        }
+        changed{
+            echo "build status changed !!!!!"
+        }
+    }
 }
