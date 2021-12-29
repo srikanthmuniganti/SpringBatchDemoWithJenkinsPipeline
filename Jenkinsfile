@@ -13,20 +13,30 @@
 
 pipeline {
     agent any
-    steps{
-        step('clean stage'){
-            echo "clean stage"
-            sh 'mvn clean'
+    stages{
+        stage('clean stage'){
+            steps{
+                echo "clean stage"
+                sh 'mvn clean'
+            }
         }
-
-        step('compile stage'){
-            echo "compile stage"
-            sh 'mvn compile'
+        stage('compile stage'){
+            steps{
+                echo "compile stage"
+                sh 'mvn compile'
+            }            
         }
+        stage('build stage'){
+            steps{
+                echo "build stage"
+                sh 'mvn package'
+            }
+        }
+    }
 
-        step('build stage'){
-            echo "build stage"
-            sh 'mvn package'
+    post{
+        successful{
+            echo "successfully build !!!!!!"
         }
     }
 }

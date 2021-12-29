@@ -1,0 +1,11 @@
+com\dev\batch\appln\models\MatchInput.class
+com\dev\batch\appln\configuration\SpringBatchConfiguration$1.class
+com\dev\batch\appln\SpringBatchDemoApplication.class
+com\dev\batch\appln\service\ServiceClass.class
+com\dev\batch\appln\configuration\JobCompletionNotificationListener.class
+com\dev\batch\appln\configuration\MatchOutputItemProcessor.class
+com\dev\batch\appln\models\MatchOutput.class
+com\dev\batch\appln\repository\BatchRepository.class
+com\dev\batch\appln\controller\ControllerClass.class
+com\dev\batch\appln\models\TeamStats.class
+com\dev\batch\appln\configuration\SpringBatchConfiguration.class
