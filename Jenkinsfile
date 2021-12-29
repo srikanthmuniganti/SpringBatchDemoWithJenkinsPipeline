@@ -67,7 +67,7 @@ pipeline {
         stage('Docker Login stage'){
             steps{
                 echo "Login stage"
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                 echo "login successfull"
             }
         }
@@ -84,6 +84,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Running Image stage'){
+            steps{
+                echo "Running Image stage"
+                script{
+                    dockerImage.withRun('-p 8090:8090')
+                }                
+            }
+        }
+
+
     }
 
     post{
