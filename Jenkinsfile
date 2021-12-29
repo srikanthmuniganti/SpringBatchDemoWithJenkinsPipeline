@@ -13,6 +13,7 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				checkout scm
+				echo "SCM pull successfull"
 				echo "$PATH"
 				echo "$env.BUILD_NUMBER"
 				echo "$env.BUILD_ID"
