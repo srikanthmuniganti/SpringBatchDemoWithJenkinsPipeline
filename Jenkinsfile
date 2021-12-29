@@ -19,7 +19,7 @@ pipeline {
         dockerHome = tool 'Docker Configured'
         mavenHome = tool 'Maven'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
-        //echo "environment -path  ----> $PATH"
+        echo "environment path  $PATH" 
     }
     stages{
         stage('clean stage'){
