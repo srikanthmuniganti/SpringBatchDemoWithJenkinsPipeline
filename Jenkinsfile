@@ -79,7 +79,7 @@ pipeline {
                 echo "Pushing Docker Image"
                 // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
                 script{
-                    docker.withRegistry(' ','dockerhub'){
+                    docker.withRegistry('https://registry.hub.docker.com','dockerhub'){
                         dockerImage.push()
                         dockerImage.push('latest')
                     }                    
