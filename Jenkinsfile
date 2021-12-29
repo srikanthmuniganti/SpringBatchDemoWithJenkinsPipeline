@@ -25,7 +25,7 @@ pipeline {
         stage('Environment variable values'){
             steps{
             	sh "mvn --version"
-            	sh "docker version"
+            	//sh "docker version"
                 echo "PATH - $PATH"
                 echo "BUILD_NUMBER - $env.BUILD_NUMBER"
                 echo "BUILD_ID - $env.BUILD_ID"
