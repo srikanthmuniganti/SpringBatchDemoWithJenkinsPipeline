@@ -13,7 +13,11 @@
 
 pipeline {
 
-    agent any
+    agent {
+        docker {
+            image 'maven:3.6.3'
+        }
+    } 
     
     environment{
         dockerHome = tool 'Docker Configured'
@@ -54,10 +58,10 @@ pipeline {
             steps{
                 echo "Building Docker Image"
                 echo "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
-                sh "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
-                //script{
-                //    dockerImage = docker.build("1332117977/${env.JOB_NAME}:${env.BUILD_TAG}")
-                //}
+                //sh "docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG . "
+                script{
+                    dockerImage = docker.build("1332117977/${env.JOB_NAME}:${env.BUILD_TAG}")
+                }
             }
         }
 
