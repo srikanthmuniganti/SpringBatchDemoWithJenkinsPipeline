@@ -13,11 +13,7 @@
 
 pipeline {
 
-    agent {
-        docker {
-            image 'maven:3.6.3'
-        }
-    } 
+    agent any
     
     environment{
         dockerHome = tool 'Docker Configured'
@@ -28,6 +24,8 @@ pipeline {
     stages{
         stage('Environment variable values'){
             steps{
+            	echo "mvn --version"
+            	echo "docker -version"
                 echo "PATH - $PATH"
                 echo "BUILD_NUMBER - $env.BUILD_NUMBER"
                 echo "BUILD_ID - $env.BUILD_ID"
@@ -70,7 +68,7 @@ pipeline {
                 echo "Pushing Docker Image"
                 // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
                 script{
-                    dockerHome.withRegistry('','dockerhub'){
+                    docker.withRegistry('','dockerhub'){
                         dockerImage.push()
                         dockerImage.push('latest')
                     }                    
