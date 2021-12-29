@@ -17,19 +17,19 @@ pipeline {
         stage('clean stage'){
             steps{
                 echo "clean stage"
-                sh 'mvn clean'
+                sh "mvn clean"
             }
         }
         stage('compile stage'){
             steps{
                 echo "compile stage"
-                sh 'mvn compile'
+                sh "mvn compile"
             }            
         }
         stage('build stage'){
             steps{
                 echo "build stage"
-                sh 'mvn package'
+                sh "mvn package"
             }
         }
     }
