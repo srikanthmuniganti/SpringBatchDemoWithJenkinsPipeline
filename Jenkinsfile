@@ -19,6 +19,7 @@ pipeline {
         dockerHome = tool 'Docker Configured'
         mavenHome = tool 'Maven'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
         //echo "environment -path  ----> $PATH"
     }
     stages{
@@ -63,15 +64,23 @@ pipeline {
             }
         }
 
+        stage('Docker Login stage'){
+            steps{
+                echo "Login stage"
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                echo "login successfull"
+            }
+        }
+
         stage('Pushing Docker Image'){
             steps{
                 echo "Pushing Docker Image"
                 // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
                 script{
-                    docker.withRegistry('','dockerhub'){
-                        dockerImage.push()
-                        dockerImage.push('latest')
-                    }                    
+                    //docker.withRegistry('','dockerhub'){
+                    dockerImage.push()
+                    dockerImage.push('latest')
+                    //}                    
                 }
             }
         }
