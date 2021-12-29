@@ -67,7 +67,7 @@ pipeline {
         stage('Docker Login stage'){
             steps{
                 echo "Login stage"
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
                 echo "login successfull"
             }
         }
@@ -78,7 +78,7 @@ pipeline {
                 // docker build -t 1332117977/$env.JOB_NAME:$env.BUILD_TAG
                 script{
                     //docker.withRegistry('','dockerhub'){
-                    dockerImage.push()
+                    //dockerImage.push()
                     dockerImage.push('latest')
                     //}                    
                 }
@@ -88,9 +88,10 @@ pipeline {
         stage('Running Image stage'){
             steps{
                 echo "Running Image stage"
-                script{
-                    dockerImage.withRun('-p 8090:8090')
-                }                
+                //script{
+                //    dockerImage.withRun('-p 8090:8090')
+                //}
+                sh 'docker run -d -p 8090:8090 --name $env.JOB_NAME $env.JOB_NAME:$env.BUILD_TAG'                
             }
         }
 
