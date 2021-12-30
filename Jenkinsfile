@@ -88,11 +88,11 @@ pipeline {
         stage('Running Image stage'){
             steps{
                 echo "Running Image stage"
-		echo "docker run -d -p 8090:8090 --name $JOB_NAME $JOB_NAME:$BUILD_TAG"
+		echo "docker run -d -p 8090:8090 --name $JOB_NAME 1332117977/$JOB_NAME:$BUILD_TAG"
                 //script{
                 //    dockerImage.withRun('-p 8090:8090')
                 //}
-                sh 'docker run -d -p 8090:8090 --name $JOB_NAME $JOB_NAME:$BUILD_TAG'                
+                sh 'docker run -d -p 8090:8090 --name $JOB_NAME 1332117977/$JOB_NAME:$BUILD_TAG'                
             }
         }
 
@@ -108,6 +108,7 @@ pipeline {
         }
         always{
             echo "I'm always executed!!!!!!"
+	    sh 'docker logout'
         }
         changed{
             echo "build status changed !!!!!"
