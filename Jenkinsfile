@@ -92,7 +92,7 @@ pipeline {
                 //script{
                 //    dockerImage.withRun('-p 8090:8090')
                 //}
-                sh 'docker run -d -p 8090:8090 --name $.JOB_NAME $JOB_NAME:$BUILD_TAG'                
+                sh 'docker run -d -p 8090:8090 --name $JOB_NAME $JOB_NAME:$BUILD_TAG'                
             }
         }
 
