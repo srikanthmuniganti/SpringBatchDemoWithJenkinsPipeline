@@ -88,7 +88,7 @@ pipeline {
         stage('Running Image stage'){
             steps{
                 echo "Running Image stage"
-		echo "docker run -d -p 8090:8090 --name $JOB_NAME $JOB_NAME:$.BUILD_TAG"
+		echo "docker run -d -p 8090:8090 --name $JOB_NAME $JOB_NAME:$BUILD_TAG"
                 //script{
                 //    dockerImage.withRun('-p 8090:8090')
                 //}
